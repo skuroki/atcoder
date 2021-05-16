@@ -1,13 +1,3 @@
-def dp(*vars)
-  if ENV['DEBUG']
-    puts vars
-  end
-end
-
-def dpv(name, binding)
-  dp "#{name} = #{eval(name.to_s, binding)}"
-end
-
 H, W = gets.chomp.split(' ').map(&:to_i)
 
 @a = []
@@ -20,21 +10,17 @@ def sabun(i, j)
   @a[i][j]
 end
 
+@tna = Array.new(H + 1) { [] }
 H.times do |ii|
   W.times do |jj|
     i = H - ii - 1
     j = W - jj - 1
-    #dp "tna(#{i}, #{j}"
-    #dpv '@tna', binding
-    if @tna[i][j]
-      #dp "tna(#{i}, #{j}) = #{@tna[i][j]}"
-      return @tna[i][j]
-    end
+    #dp @tna
 
     migi = @a[i][j+1]
-    #dpv :migi, binding
+    #dp migi
     sita = @a[i+1][j]
-    #dpv :sita, binding
+    #dp sita
 
     result = nil
     if !migi && !sita
@@ -61,7 +47,6 @@ H.times do |ii|
       result = [m, s].max
     end
     @tna[i][j] = result
-    #dp "result(#{i}, #{j}) = #{result}"
   end
 end
 
