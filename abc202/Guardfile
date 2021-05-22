@@ -1,0 +1,5 @@
+guard :shell do
+  watch(/^([a-z0-9]+)\.rb/) do |m|
+    `(ruby m.rb #{m[1]}.rb dev > #{m[1]}_dev.rb) && (cat input_#{m[1]}.txt | ruby #{m[1]}_dev.rb)`
+  end
+end
